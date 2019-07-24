@@ -1,0 +1,21 @@
+version: '3'
+services:
+    db:
+        image: mysql
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+    app:
+        build: docker/fpm
+        environment:
+            XDEBUG_CONFIG: "remote_enable=1 remote_connect_back=1"
+            PHP_IDE_CONFIG: "serverName=Docker"
+        volumes:
+            - .:/var/www
+    nginx:
+        build: docker/nginx
+        ports:
+            - "80:80"
+        volumes:
+            - .:/var/www
