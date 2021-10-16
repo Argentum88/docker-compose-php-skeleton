@@ -8,6 +8,8 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: db
+        volumes:
+            - replase_db_valume_name:/var/lib/mysql
     app:
         build: docker/fpm
         environment:
@@ -26,3 +28,4 @@ services:
             - ./docker/nginx/site.conf:/etc/nginx/conf.d/default.conf
 volumes:
     composercache:
+    replase_db_valume_name:
